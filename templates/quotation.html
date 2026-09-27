@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}{% block content %}
+<h1>Cost & Lead-Time Estimator</h1>
+<p class="sub">A basic quotation estimate using order quantity, weight, cycle time and cost inputs.</p>
+<form method="post" class="form">
+<label>Quantity<input type="number" name="quantity" min="1" required></label>
+<label>Weight per casting (kg)<input type="number" name="weight" step="0.01" required></label>
+<label>Production cycle per casting (hours)<input type="number" name="cycle_hours" step="0.1" required></label>
+<label>Material cost per kg (₹)<input type="number" name="material_rate" step="0.01" required></label>
+<label>Labour cost (₹)<input type="number" name="labour" step="0.01" value="0"></label>
+<label>Overhead (₹)<input type="number" name="overhead" step="0.01" value="0"></label>
+<button>Estimate</button>
+</form>
+{% if result %}<div class="result"><h2>Quotation Estimate</h2>
+<p>Total casting weight: <b>{{result.total_weight}} kg</b></p>
+<p>Material cost: <b>₹{{"%.2f"|format(result.material_cost)}}</b></p>
+<p>Estimated production cost: <b>₹{{"%.2f"|format(result.production_cost)}}</b></p>
+<p>Estimated production lead time: <b>{{"%.1f"|format(result.lead_time_hours)}} hours</b></p>
+</div>{% endif %}
+{% endblock %}

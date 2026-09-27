@@ -1,0 +1,13 @@
+
+{% extends "base.html" %}{% block content %}
+<h1>Maintenance Log NLP Assistant</h1>
+<p class="sub">Enter a maintenance record to identify likely recurring fault categories and a suggested action.</p>
+<form method="post" class="form">
+<label>Machine / Equipment<input name="machine" required></label>
+<label>Maintenance record<textarea name="record" rows="7" required placeholder="Example: Furnace motor showing vibration and bearing noise..."></textarea></label>
+<button>Analyse Record</button>
+</form>
+{% if analysis %}<div class="result"><h2>Analysis</h2>
+<p><b>Detected categories:</b> {{analysis.faults|join(", ")}}</p>
+<p><b>Suggested action:</b> {{analysis.action}}</p></div>{% endif %}
+{% endblock %}

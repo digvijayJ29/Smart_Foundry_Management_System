@@ -1,0 +1,16 @@
+
+{% extends "base.html" %}{% block content %}
+<h1>Furnace Load Simulation</h1>
+<p class="sub">Compare a batch size with furnace capacity before production.</p>
+<form method="post" class="form">
+<label>Required batch metal (kg)<input type="number" name="batch" step="0.1" required></label>
+<label>Furnace capacity (kg)<input type="number" name="capacity" step="0.1" required></label>
+<button>Simulate</button>
+</form>
+{% if result %}<div class="result"><h2>Simulation Result</h2>
+<p>Batch requirement: <b>{{result.batch}} kg</b></p>
+<p>Furnace capacity: <b>{{result.capacity}} kg</b></p>
+<p>Required furnace charges: <b>{{result.charge_count}}</b></p>
+<p>Capacity utilization: <b>{{"%.1f"|format(result.utilization)}}%</b></p>
+</div>{% endif %}
+{% endblock %}

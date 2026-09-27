@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}{% block content %}
+<h1>AI Pattern Recognition</h1>
+<p class="sub">Upload a casting-pattern image and enter the missing production information.</p>
+<form method="post" enctype="multipart/form-data" class="form">
+<label>Pattern image <input type="file" name="image" accept="image/*"></label>
+<label>Quantity <input type="number" name="quantity" min="1" value="1"></label>
+<label>Weight per casting (kg) <input type="number" name="weight" step="0.01" required></label>
+<label>Material <input name="material" value="Cast Iron"></label>
+<button>Process Pattern</button>
+</form>
+{% if result %}
+<div class="result"><h2>Pattern Result</h2>
+{% if result.image %}<img class="preview" src="{{result.image}}">{% endif %}
+<p><b>Detected/entered quantity:</b> {{result.quantity}}</p>
+<p><b>Weight per casting:</b> {{result.weight}} kg</p>
+<p><b>Total molten metal requirement:</b> {{result.total}} kg</p>
+<p><b>Material:</b> {{result.material}}</p></div>{% endif %}
+{% endblock %}

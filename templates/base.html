@@ -1,0 +1,26 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Foundry</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <div class="brand">SMART FOUNDRY</div>
+  <nav>
+    <a href="/">Dashboard</a><a href="/orders">Orders</a><a href="/patterns">Patterns</a>
+    <a href="/charge">Charge Mix</a><a href="/maintenance">Maintenance</a>
+    <a href="/quotation">Quotation</a><a href="/simulation">Furnace</a>
+  </nav>
+</header>
+<main>
+{% with messages=get_flashed_messages() %}
+{% for m in messages %}<div class="flash">{{m}}</div>{% endfor %}
+{% endwith %}
+{% block content %}{% endblock %}
+</main>
+</body>
+</html>

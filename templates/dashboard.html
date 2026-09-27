@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}{% block content %}
+<h1>Foundry Dashboard</h1>
+<p class="sub">One place to manage production, materials, maintenance, quotations and furnace planning.</p>
+<div class="cards">
+<div class="card"><b>Pattern Recognition</b><span>Detect and count casting patterns.</span></div>
+<div class="card"><b>Charge Planning</b><span>Recommend a practical charge mix.</span></div>
+<div class="card"><b>Maintenance</b><span>Analyse records and recurring faults.</span></div>
+<div class="card"><b>Quotation</b><span>Estimate cost and lead time.</span></div>
+</div>
+<section><h2>Recent Casting Orders</h2>
+<table><tr><th>Customer</th><th>Pattern</th><th>Qty</th><th>Weight</th><th>Material</th><th>Status</th></tr>
+{% for o in orders %}<tr><td>{{o.customer}}</td><td>{{o.pattern}}</td><td>{{o.quantity}}</td><td>{{o.weight}} kg</td><td>{{o.material}}</td><td>{{o.status}}</td></tr>{% else %}
+<tr><td colspan="6">No orders yet.</td></tr>{% endfor %}</table></section>
+<section><h2>Recent Maintenance Records</h2>
+{% for m in maintenance %}<div class="record"><b>{{m.machine}}</b> — {{m.record}} <small>{{m.created_at}}</small></div>{% else %}<p>No records yet.</p>{% endfor %}
+</section>
+{% endblock %}

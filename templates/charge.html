@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}{% block content %}
+<h1>Intelligent Charge Mix</h1>
+<p class="sub">Prototype optimizer for metallic charge and alloy additions.</p>
+<form method="post" class="form">
+<label>Total batch metal (kg)<input type="number" name="total_kg" step="0.1" required></label>
+<label>Target Carbon (%)<input type="number" name="carbon" step="0.01" value="3.40"></label>
+<label>Target Silicon (%)<input type="number" name="silicon" step="0.01" value="2.10"></label>
+<label>Target Manganese (%)<input type="number" name="manganese" step="0.01" value="0.60"></label>
+<button>Recommend Charge Mix</button>
+</form>
+{% if recommendation %}
+<div class="result"><h2>Recommended Mix</h2>
+<table><tr><th>Material</th><th>Percentage</th><th>Approx. kg</th></tr>
+<tr><td>Pig Iron</td><td>{{"%.2f"|format(recommendation.pig)}}%</td><td>{{"%.2f"|format(recommendation.pig/100*request.form.get('total_kg')|float)}}</td></tr>
+<tr><td>Return Scrap</td><td>{{"%.2f"|format(recommendation.ret)}}%</td><td>{{"%.2f"|format(recommendation.ret/100*request.form.get('total_kg')|float)}}</td></tr>
+<tr><td>Steel Scrap</td><td>{{"%.2f"|format(recommendation.steel)}}%</td><td>{{"%.2f"|format(recommendation.steel/100*request.form.get('total_kg')|float)}}</td></tr>
+<tr><td>FeSi</td><td>{{"%.3f"|format(recommendation.fesi)}}%</td><td>{{"%.2f"|format(recommendation.fesi/100*request.form.get('total_kg')|float)}}</td></tr>
+<tr><td>FeMn</td><td>{{"%.3f"|format(recommendation.femn)}}%</td><td>{{"%.2f"|format(recommendation.femn/100*request.form.get('total_kg')|float)}}</td></tr>
+<tr><td>Carbon Additive</td><td>{{"%.3f"|format(recommendation.carbon)}}%</td><td>{{"%.2f"|format(recommendation.carbon/100*request.form.get('total_kg')|float)}}</td></tr>
+</table>
+<p><b>Estimated charge cost:</b> ₹{{"%.2f"|format(recommendation.cost)}}</p>
+<p><b>Estimated C / Si / Mn:</b> {{"%.3f"|format(recommendation.c)}}% / {{"%.3f"|format(recommendation.si)}}% / {{"%.3f"|format(recommendation.mn)}}%</p>
+</div>{% endif %}
+{% endblock %}

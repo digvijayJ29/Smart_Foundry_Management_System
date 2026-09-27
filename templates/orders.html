@@ -1,0 +1,15 @@
+
+{% extends "base.html" %}{% block content %}
+<h1>Casting Orders</h1>
+<form method="post" class="form compact">
+<label>Customer<input name="customer" required></label>
+<label>Pattern<input name="pattern" required></label>
+<label>Quantity<input type="number" name="quantity" min="1" required></label>
+<label>Weight/casting (kg)<input type="number" name="weight" step="0.01" required></label>
+<label>Material<input name="material" value="Cast Iron"></label>
+<button>Add Order</button>
+</form>
+<table><tr><th>Customer</th><th>Pattern</th><th>Qty</th><th>Weight</th><th>Material</th><th>Status</th><th>Date</th></tr>
+{% for o in orders %}<tr><td>{{o.customer}}</td><td>{{o.pattern}}</td><td>{{o.quantity}}</td><td>{{o.weight}}</td><td>{{o.material}}</td><td>{{o.status}}</td><td>{{o.created_at}}</td></tr>{% endfor %}
+</table>
+{% endblock %}

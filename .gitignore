@@ -1,0 +1,7 @@
+﻿foundry.db
+*.zip
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
